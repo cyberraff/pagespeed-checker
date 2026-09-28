@@ -43,6 +43,27 @@ input:focus-visible {
 	align-items: center;
 	justify-content: space-between;
 	border-bottom: 1px solid var(--line);
+	gap: 24px;
+}
+.topbar-nav {
+	display: flex;
+	gap: 8px;
+}
+.topbar-link {
+	color: var(--muted);
+	text-decoration: none;
+	font: 500 12px var(--sans);
+	padding: 8px 12px;
+	border-radius: 2px;
+	transition: color 0.15s, background 0.15s;
+}
+.topbar-link:hover {
+	color: var(--green);
+	background: var(--green-pale);
+}
+.topbar-link:focus-visible {
+	outline: 3px solid #e1a23c;
+	outline-offset: 2px;
 }
 .brand {
 	color: var(--ink);
