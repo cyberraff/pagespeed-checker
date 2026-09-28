@@ -1,0 +1,13 @@
+services:
+    - type: web
+      name: pagespeed-checker
+      runtime: node
+      plan: free
+      buildCommand: npm install
+      startCommand: npm start
+      healthCheckPath: /health
+      envVars:
+          - key: NODE_VERSION
+            value: 22
+          - key: PAGESPEED_API_KEY
+            sync: false

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#f4f5f2" />
+		<meta
+			name="description"
+			content="Run mobile and desktop PageSpeed inspections and download a detailed report." />
+		<title>PageSpeed Field Report</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="/styles.css" />
+		<script type="module" src="/app.js"></script>
+	</head>
+	<body>
+		<header class="topbar">
+			<a class="brand" href="/" aria-label="PageSpeed Field Report home">
+				<span class="brand-mark" aria-hidden="true"
+					><i></i><i></i><i></i
+				></span>
+				<span>FIELDNOTE<span class="brand-period">.</span></span>
+			</a>
+			<div class="topbar-meta">
+				<span class="live-dot"></span> PAGESPEED INSIGHTS
+			</div>
+		</header>
+
+		<main>
+			<section class="intro" aria-labelledby="page-title">
+				<div>
+					<p class="eyebrow">SITE PERFORMANCE / 01</p>
+					<h1 id="page-title">
+						A clearer picture<br />of your website.
+					</h1>
+					<p class="intro-note">
+						One inspection. Two devices. Every useful detail.
+					</p>
+				</div>
+				<div class="intro-index" aria-hidden="true">
+					<span>FIELD</span><span>REPORT</span><b>№ 001</b>
+				</div>
+			</section>
+
+			<section class="inspect-panel" aria-label="Inspect a website">
+				<form id="inspect-form" novalidate>
+					<label for="website-url">WEBSITE ADDRESS</label>
+					<div class="form-row">
+						<div class="url-input-wrap">
+							<span class="url-prefix" aria-hidden="true">↗</span>
+							<input
+								id="website-url"
+								name="url"
+								type="text"
+								inputmode="url"
+								autocomplete="url"
+								placeholder="https://yourwebsite.com"
+								aria-describedby="form-error"
+								required />
+						</div>
+						<button id="inspect-button" type="submit">
+							<span>Run inspection</span
+							><span aria-hidden="true">↗</span>
+						</button>
+					</div>
+					<p id="form-error" class="form-error" role="alert"></p>
+				</form>
+				<div class="inspect-aside">
+					<span class="aside-number">02</span
+					><span>MOBILE + DESKTOP</span
+					><span class="aside-divider"></span><span>FREE REPORT</span>
+				</div>
+			</section>
+
+			<section
+				id="status-region"
+				class="status-region"
+				aria-live="polite">
+				<div id="loading" class="loading-state" hidden>
+					<span class="loader" aria-hidden="true"></span>
+					<div>
+						<strong>Measuring the experience</strong
+						><span id="loading-message"
+							>Running mobile and desktop audits. This can take a
+							minute.</span
+						>
+					</div>
+					<span class="loading-side">PLEASE KEEP THIS TAB OPEN</span>
+				</div>
+			</section>
+
+			<section
+				id="results"
+				class="results"
+				hidden
+				aria-label="Inspection results">
+				<div class="results-heading">
+					<div>
+						<p class="eyebrow">INSPECTION COMPLETE</p>
+						<h2 id="result-domain"></h2>
+						<a
+							id="result-url"
+							class="result-url"
+							target="_blank"
+							rel="noreferrer"></a>
+					</div>
+					<a
+						id="download-report"
+						class="download-button"
+						href="#"
+						download
+						><span aria-hidden="true">↓</span> Download full
+						report</a
+					>
+				</div>
+				<div id="partial-warning" class="partial-warning" hidden></div>
+				<div
+					class="device-switch"
+					role="tablist"
+					aria-label="Device report">
+					<button
+						id="tab-mobile"
+						class="device-tab is-active"
+						role="tab"
+						aria-selected="true"
+						aria-controls="device-report"
+						data-strategy="mobile">
+						<span aria-hidden="true">▯</span> Mobile
+						<span id="mobile-score" class="tab-score"></span>
+					</button>
+					<button
+						id="tab-desktop"
+						class="device-tab"
+						role="tab"
+						aria-selected="false"
+						aria-controls="device-report"
+						data-strategy="desktop">
+						<span aria-hidden="true">▱</span> Desktop
+						<span id="desktop-score" class="tab-score"></span>
+					</button>
+					<span class="run-stamp" id="run-stamp"></span>
+				</div>
+				<div
+					id="device-report"
+					role="tabpanel"
+					aria-labelledby="tab-mobile"></div>
+			</section>
+
+			<section
+				id="empty-state"
+				class="empty-state"
+				aria-label="No inspection yet">
+				<div class="empty-rule">
+					<span>YOUR NEXT REPORT STARTS HERE</span
+					><span>01 — 02</span>
+				</div>
+				<div class="empty-content">
+					<div class="empty-glyph" aria-hidden="true">
+						<span></span><span></span><span></span><span></span
+						><span></span>
+					</div>
+					<div>
+						<h2>Ready when you are.</h2>
+						<p>
+							Enter a public website address above to see how it
+							performs on a phone and a desktop.
+						</p>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer">
+			<span>FIELDNOTE PERFORMANCE LAB</span
+			><span>POWERED BY GOOGLE PAGESPEED INSIGHTS</span>
+		</footer>
+	</body>
+</html>
