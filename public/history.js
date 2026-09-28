@@ -47,7 +47,10 @@ function renderRow(run) {
 		<td><a href="${run.url}" target="_blank" rel="noreferrer">${new URL(run.url).hostname}</a></td>
 		<td>${scoreBadge(mobilePerf, 'M')}</td>
 		<td>${scoreBadge(desktopPerf, 'D')}</td>
-		<td><button class="view-btn" data-id="${run.id}" aria-label="View report">View</button></td>
+		<td>
+			<button class="view-btn" data-id="${run.id}" aria-label="View report">View</button>
+			<button class="delete-btn" data-id="${run.id}" aria-label="Delete report" style="margin-left: 6px; background: var(--orange-pale); color: var(--orange); border: 1px solid var(--orange);">🗑</button>
+		</td>
 	`;
 	return tr;
 }
@@ -97,11 +100,32 @@ async function loadHistory() {
 }
 
 tableBody.addEventListener('click', (e) => {
-	const btn = e.target.closest('.view-btn');
-	if (btn) {
-		window.location.href = `/?history=${btn.dataset.id}`;
+	const viewBtn = e.target.closest('.view-btn');
+	if (viewBtn) {
+		window.location.href = `/?history=${viewBtn.dataset.id}`;
+		return;
+	}
+	const deleteBtn = e.target.closest('.delete-btn');
+	if (deleteBtn) {
+		const id = deleteBtn.dataset.id;
+		if (confirm('Delete this inspection? This cannot be undone.')) {
+			deleteRun(id);
+		}
 	}
 });
+
+async function deleteRun(id) {
+	const btn = tableBody.querySelector(`.delete-btn[data-id="${id}"]`);
+	if (btn) btn.disabled = true;
+	try {
+		const res = await fetch(`/api/history/${id}`, { method: 'DELETE' });
+		if (!res.ok) throw new Error('Failed to delete');
+		await loadHistory();
+	} catch (error) {
+		alert(error.message);
+		if (btn) btn.disabled = false;
+	}
+}
 
 prevBtn.addEventListener('click', () => {
 	if (currentPage > 0) {

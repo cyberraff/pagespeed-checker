@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { extname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { analyzeSite } from './lib/pagespeed.js';
-import { saveRun, getHistory, getRun, clearHistory } from './lib/storage.js';
+import { saveRun, getHistory, getRun, clearHistory, deleteRun } from './lib/storage.js';
 
 const root = resolve(fileURLToPath(new URL('.', import.meta.url)), 'public');
 const mimeTypes = {
@@ -141,6 +141,17 @@ const server = createServer(async (request, response) => {
 			return writeJson(response, 500, {
 				error: 'Failed to clear history.',
 			});
+		}
+	}
+
+	if (pathname.startsWith('/api/history/') && request.method === 'DELETE') {
+		try {
+			const id = pathname.split('/api/history/')[1];
+			const deleted = await deleteRun(id);
+			if (!deleted) return writeJson(response, 404, { error: 'Run not found.' });
+			return writeJson(response, 200, { ok: true });
+		} catch (error) {
+			return writeJson(response, 500, { error: 'Failed to delete run.' });
 		}
 	}
 
