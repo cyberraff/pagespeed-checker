@@ -1,3 +1,7 @@
+if ('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('/sw.js').catch(() => {});
+}
+
 const form = document.querySelector('#inspect-form');
 const input = document.querySelector('#website-url');
 const button = document.querySelector('#inspect-button');
@@ -8,6 +12,29 @@ const emptyState = document.querySelector('#empty-state');
 const reportPanel = document.querySelector('#device-report');
 const partialWarning = document.querySelector('#partial-warning');
 let currentResult;
+
+async function loadHistoryRun(id) {
+	loading.hidden = false;
+	results.hidden = true;
+	emptyState.hidden = true;
+	try {
+		const res = await fetch(`/api/history/${id}`);
+		const data = await res.json();
+		if (!res.ok) throw new Error(data.error || 'Failed to load run');
+		showResult(data);
+	} catch (error) {
+		errorBox.textContent = error.message;
+		emptyState.hidden = false;
+	} finally {
+		loading.hidden = true;
+	}
+}
+
+const urlParams = new URLSearchParams(window.location.search);
+const historyId = urlParams.get('history');
+if (historyId) {
+	loadHistoryRun(historyId);
+}
 
 function element(tag, className, text) {
 	const node = document.createElement(tag);

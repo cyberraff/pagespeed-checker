@@ -1,0 +1,43 @@
+{
+	"name": "PageSpeed Field Report",
+	"short_name": "PageSpeed",
+	"description": "Run mobile and desktop PageSpeed inspections and download detailed reports.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#f4f5f2",
+	"theme_color": "#176b4b",
+	"orientation": "portrait-primary",
+	"icons": [
+		{
+			"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23176b4b' width='100' height='100' rx='20'/><rect fill='%23eff7f1' x='20' y='55' width='18' height='40' rx='2'/><rect fill='%23eff7f1' x='42' y='30' width='18' height='65' rx='2'/><rect fill='%23eff7f1' x='64' y='10' width='18' height='85' rx='2'/></svg>",
+			"sizes": "any",
+			"type": "image/svg+xml",
+			"purpose": "any maskable"
+		}
+	],
+	"categories": ["utilities", "developer"],
+	"screenshots": [],
+	"shortcuts": [
+		{
+			"name": "New Inspection",
+			"short_name": "Inspect",
+			"description": "Run a new PageSpeed inspection",
+			"url": "/",
+			"icons": []
+		},
+		{
+			"name": "History",
+			"short_name": "History",
+			"description": "View previous inspections",
+			"url": "/history.html",
+			"icons": []
+		},
+		{
+			"name": "Batch Inspection",
+			"short_name": "Batch",
+			"description": "Analyze multiple sites at once",
+			"url": "/batch.html",
+			"icons": []
+		}
+	]
+}
